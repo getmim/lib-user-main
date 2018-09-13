@@ -55,12 +55,20 @@ return [
                 ],
                 'index' => 5000
             ],
+            'updated' => [
+                'type' => 'TIMESTAMP',
+                'attrs' => [
+                    'default' => 'CURRENT_TIMESTAMP',
+                    'update' => 'CURRENT_TIMESTAMP'
+                ],
+                'index' => 6000
+            ],
             'created' => [
                 'type' => 'TIMESTAMP',
                 'attrs' => [
                     'default' => 'CURRENT_TIMESTAMP'
                 ],
-                'index' => 6000
+                'index' => 7000
             ]
         ]
     ]
