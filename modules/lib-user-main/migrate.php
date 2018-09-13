@@ -42,6 +42,10 @@ return [
                 'length' => 250,
                 'index' => 4000
             ],
+            // 0 Deleted
+            // 1 Banner
+            // 2 Unverified
+            // 3 Verified
             'status' => [
                 'type' => 'TINYINT',
                 'length' => 1,
