@@ -12,7 +12,17 @@ use LibUserMain\Model\User as _User;
 class User implements \LibUser\Iface\Handler
 {
     static function getByCredentials(string $identity, string $password): ?object{
-        $user = _User::getOne(['name'=>$identity]);
+        $cond = [];
+        $bys = \Mim::$app->config->libUserMain->login->by;
+        foreach($bys as $by => $allow){
+            if($allow)
+                $cond[] = [$by => $identity];
+        }
+
+        if(!$cond)
+            return null;
+
+        $user = _User::getOne(['$or'=>$cond]);
         if(!$user)
             return null;
         if($user->status == 0)

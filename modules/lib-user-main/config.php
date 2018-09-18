@@ -39,5 +39,12 @@ return [
     ],
     'libUser' => [
         'handler' => 'LibUserMain\\Handler\\User'
+    ],
+    'libUserMain' => [
+        'login' => [
+            'by' => [
+                'name'  => true
+            ]
+        ]
     ]
 ];
