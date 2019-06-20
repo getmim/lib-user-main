@@ -38,6 +38,14 @@ class User implements \LibUser\Iface\Handler
         return $user ? $user : null;
     }
 
+    static function getMany(array $where): ?array{
+        return _User::get($where);
+    }
+
+    static function getOne(array $where): ?object{
+        return _User::getOne($where);
+    }
+
     static function hashPassword(string $password): ?string{
         return password_hash($password, PASSWORD_DEFAULT);
     }
