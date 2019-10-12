@@ -53,4 +53,8 @@ class User implements \LibUser\Iface\Handler
     static function verifyPassword(string $password, object $user): bool{
         return password_verify($password, $user->password);
     }
+
+    static function set(array $fields, array $where=[]): bool{
+        return _User::set($fields, $where);
+    }
 }
