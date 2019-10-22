@@ -50,6 +50,10 @@ class User implements \LibUser\Iface\Handler
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
+    static function lastError(){
+        return _User::lastError();
+    }
+
     static function verifyPassword(string $password, object $user): bool{
         return password_verify($password, $user->password);
     }
