@@ -33,6 +33,10 @@ class User implements \LibUser\Iface\Handler
         return $user;
     }
 
+    static function count(array $where=[]): int{
+        return _User::count($where);
+    }
+
     static function getById(string $identity): ?object{
         $user = _User::getOne(['id'=>$identity]);
         return $user ? $user : null;
