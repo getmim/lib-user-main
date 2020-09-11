@@ -43,8 +43,8 @@ class User implements \LibUser\Iface\Handler
         return $user ? $user : null;
     }
 
-    static function getMany(array $where): ?array{
-        return _User::get($where);
+    static function getMany(array $where, int $rpp=0, int $page=1, array $order=[]): ?array{
+        return _User::get($where, $rpp, $page, $order);
     }
 
     static function getOne(array $where): ?object{
