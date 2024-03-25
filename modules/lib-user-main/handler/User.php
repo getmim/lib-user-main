@@ -11,27 +11,49 @@ use LibUserMain\Model\User as _User;
 
 class User implements \LibUser\Iface\Handler
 {
-    static function getByCredentials(string $identity, string $password, array $where=[]): ?object{
+    static function getByCredentials(string $identity, string $password, array $where=[]): ?object
+    {
         $cond = [];
         $bys = \Mim::$app->config->libUserMain->login->by;
-        foreach($bys as $by => $allow){
-            if($allow)
+        foreach ($bys as $by => $allow) {
+            if ($allow) {
                 $cond[] = [$by => $identity];
+            }
         }
 
-        if(!$cond)
+        if (!$cond) {
             return null;
+        }
 
         $where['$or'] = $cond;
         $user = _User::getOne($where);
-        if(!$user)
+        if (!$user) {
             return null;
-        if($user->status == 0)
+        }
+        if ($user->status == 0) {
             return null;
+        }
 
-        if(!self::verifyPassword($password, $user))
+        // try login by password
+        if(self::verifyPassword($password, $user)) {
+            return $user;
+        }
+
+        // find other verifier to verify the user
+        $verifiers = \Mim::$app->config->libUserMain->verifier;
+        if (!$verifiers) {
             return null;
-        return $user;
+        }
+
+        $verified = false;
+        foreach ($verifiers as $verifier) {
+            $verified = $verifier::verify($user, $password);
+            if ($verified) {
+                break;
+            }
+        }
+
+        return ($verified ? $user : null);
     }
 
     static function count(array $where=[]): int{

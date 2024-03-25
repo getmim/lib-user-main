@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'lib-user-main',
-    '__version' => '1.0.0',
+    '__version' => '1.1.0',
     '__git' => 'git@github.com:getmim/lib-user-main.git',
     '__license' => 'MIT',
     '__author' => [
@@ -30,6 +30,10 @@ return [
                 'type' => 'file',
                 'base' => 'modules/lib-user-main/handler'
             ],
+            'LibUserMain\\Iface' => [
+                'type' => 'file',
+                'base' => 'modules/lib-user-main/iface'
+            ],
             'LibUserMain\\Model' => [
                 'type' => 'file',
                 'base' => 'modules/lib-user-main/model'
@@ -45,6 +49,7 @@ return [
             'by' => [
                 'name'  => true
             ]
-        ]
+        ],
+        'verifier' => []
     ]
 ];
